@@ -105,6 +105,26 @@ elif page == "📈 Model Comparison":
 
     st.write("✅ Best model is the one with highest **R²** and lowest **RMSE**.")
 
+    # Plot Actual vs Predicted for each model
+    st.subheader("Actual vs Predicted Sales Plots")
+    X = df[["TV", "Radio", "Newspaper"]]
+    y = df["Sales"]
+
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42
+    )
+
+    for name, model in trained_models.items():
+        y_pred = model.predict(X_test)
+        fig, ax = plt.subplots(figsize=(6, 4))
+        ax.scatter(y_test, y_pred, color='blue', alpha=0.6)
+        ax.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()],
+                color='red', linewidth=2)
+        ax.set_xlabel("Actual Sales")
+        ax.set_ylabel("Predicted Sales")
+        ax.set_title(f"Actual vs Predicted ({name})")
+        st.pyplot(fig)
+
 # ------------------------
 # Prediction Page
 # ------------------------
