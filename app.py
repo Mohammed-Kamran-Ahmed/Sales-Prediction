@@ -9,6 +9,8 @@ from sklearn.linear_model import LinearRegression, Ridge, Lasso
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 
+st.set_page_config(page_title="Sales Prediction App", layout="wide")
+
 # ------------------------
 # Load Data
 # ------------------------
@@ -60,7 +62,6 @@ trained_models, results_df = train_models(df)
 # ------------------------
 # Sidebar Navigation
 # ------------------------
-st.set_page_config(page_title="Sales Prediction App", layout="wide")
 st.sidebar.title("Navigation")
 page = st.sidebar.radio("Go to", ["📊 EDA", "📈 Model Comparison", "🤖 Prediction"])
 
